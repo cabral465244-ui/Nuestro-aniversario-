@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#120008">
+<title>Un mes contigo ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap');
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:#080006;color:#fff}
+body{font-family:'Cormorant Garamond',serif;touch-action:manipulation}
+
+#app{
+  position:fixed;inset:0;overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 30%,rgba(255,55,110,.18),transparent 35%),
+    linear-gradient(145deg,#090008,#26000f 48%,#080006);
+}
+
+#scene{
+  position:absolute;inset:0;overflow:hidden;
+  perspective:1000px;
+}
+
+/* ---------- ATMÓSFERA ---------- */
+.glow{position:absolute;border-radius:50%;filter:blur(35px);opacity:.35;pointer-events:none}
+.g1{width:180px;height:180px;background:#ff175f;left:-70px;top:12%}
+.g2{width:220px;height:220px;background:#ff6b91;right:-100px;bottom:8%}
+.g3{width:130px;height:130px;background:#7b1647;left:35%;bottom:-60px}
+
+#wind{
+  position:absolute;inset:0;pointer-events:none;z-index:3;
+  background:
+   radial-gradient(ellipse at 15% 30%,transparent 0 50%,rgba(255,120,160,.04) 51%,transparent 53%),
+   radial-gradient(ellipse at 75% 65%,transparent 0 50%,rgba(255,120,160,.035) 51%,transparent 53%);
+  animation:wind 7s ease-in-out infinite alternate;
+}
+@keyframes wind{from{transform:translateX(-12px) skewX(-1deg)}to{transform:translateX(12px) skewX(1deg)}}
+
+/* ---------- PORTADA (CANDADO) ---------- */
+#lockScreen{
+  position:absolute;inset:0;z-index:20;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:28px;
+  transition:opacity .8s,transform .8s;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(255,25,91,.2),transparent 28%),
+    linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.75));
+}
+#lockScreen.hide{opacity:0;transform:scale(1.08);pointer-events:none}
+
+.brand{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(42px,13vw,68px);
+  color:#ff9fbe;
+  text-shadow:0 0 20px rgba(255,80,140,.55);
+  margin-bottom:2px;text-align:center;
+}
+.subtitle{font-size:16px;letter-spacing:4px;text-transform:uppercase;opacity:.75;text-align:center}
+
+.lockWrap{
+  width:170px;height:170px;margin:42px 0 25px;
+  position:relative;transform-style:preserve-3d;
+  animation:floatLock 3.2s ease-in-out infinite;
+}
+@keyframes floatLock{50%{transform:translateY(-9px) rotateY(3deg)}}
+
+.lock{
+  position:absolute;left:23px;top:45px;width:124px;height:100px;
+  border-radius:25px;
+  background:linear-gradient(145deg,#ff5d8d,#780024 55%,#25000d);
+  border:2px solid rgba(255,190,210,.7);
+  box-shadow:inset 10px 10px 20px rgba(255,255,255,.15),
+             inset -12px -12px 20px rgba(0,0,0,.45),
+             0 18px 45px rgba(255,0,80,.28);
+  transform:rotateX(4deg) translateZ(10px);
+}
+.lock:before{
+  content:"";position:absolute;left:32px;top:-65px;width:56px;height:75px;
+  border:13px solid #cfd1d8;border-bottom:0;border-radius:40px 40px 0 0;
+  filter:drop-shadow(0 5px 4px rgba(0,0,0,.5));
+}
+.keyhole{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:27px;height:35px;background:#ffd8e5;border-radius:50% 50% 45% 45%;
+  box-shadow:0 0 16px #fff;
+}
+.keyhole:after{content:"";position:absolute;width:10px;height:22px;background:#ffd8e5;left:8px;top:18px;border-radius:5px}
+
+.key{
+  position:absolute;left:50%;bottom:7%;z-index:25;
+  width:155px;height:75px;transform:translateX(-50%);
+  cursor:grab;touch-action:none;user-select:none;
+  filter:drop-shadow(0 12px 12px rgba(0,0,0,.5));
+}
+.key .ring{
+  position:absolute;left:0;top:9px;width:54px;height:54px;border:8px solid #ffd56a;border-radius:50%;
+  box-shadow:inset 0 0 10px #fff,0 0 15px rgba(255,211,100,.35);
+}
+.key .shaft{position:absolute;left:48px;top:28px;width:90px;height:14px;background:linear-gradient(#f
+... 
