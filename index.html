@@ -2,16 +2,16 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#120008">
 <title>Un mes contigo ❤️</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap');
 
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
-html,body{width:100%;height:100%;overflow:hidden;background:#080006;color:#fff}
-body{font-family:'Cormorant Garamond',serif;touch-action:manipulation}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#080006;color:#fff}
+body{font-family:'Cormorant Garamond',serif;touch-action:none}
 
 #app{
   position:fixed;inset:0;overflow:hidden;
@@ -40,7 +40,7 @@ body{font-family:'Cormorant Garamond',serif;touch-action:manipulation}
 }
 @keyframes wind{from{transform:translateX(-12px) skewX(-1deg)}to{transform:translateX(12px) skewX(1deg)}}
 
-/* ---------- PORTADA (CANDADO) ---------- */
+/* ---------- PORTADA ---------- */
 #lockScreen{
   position:absolute;inset:0;z-index:20;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -100,5 +100,425 @@ body{font-family:'Cormorant Garamond',serif;touch-action:manipulation}
   position:absolute;left:0;top:9px;width:54px;height:54px;border:8px solid #ffd56a;border-radius:50%;
   box-shadow:inset 0 0 10px #fff,0 0 15px rgba(255,211,100,.35);
 }
-.key .shaft{position:absolute;left:48px;top:28px;width:90px;height:14px;background:linear-gradient(#f
-... 
+.key .shaft{position:absolute;left:48px;top:28px;width:90px;height:14px;background:linear-gradient(#fff0a6,#d8941c,#fff0a6);border-radius:8px}
+.key .tooth1,.key .tooth2{position:absolute;top:40px;width:12px;height:18px;background:#d8941c}
+.key .tooth1{left:112px}.key .tooth2{left:130px;height:25px}
+
+.hint{font-size:16px;opacity:.8;text-align:center;line-height:1.4}
+#openBtn{
+  margin-top:20px;padding:13px 28px;border-radius:999px;
+  color:white;background:linear-gradient(135deg,#ff3f78,#a3003d);
+  border:1px solid rgba(255,180,205,.65);
+  box-shadow:0 8px 30px rgba(255,0,85,.28);
+  font:600 17px 'Cormorant Garamond',serif;letter-spacing:.5px;
+  opacity:.35;pointer-events:none;transition:.25s;
+}
+#openBtn.ready{opacity:1;pointer-events:auto}
+
+/* ---------- CONTENIDO ---------- */
+#book{
+  position:absolute;inset:0;z-index:10;
+  opacity:0;pointer-events:none;
+  transform:scale(.96) rotateX(4deg);
+  transition:opacity .9s,transform .9s;
+}
+#book.show{opacity:1;pointer-events:auto;transform:none}
+
+.page{
+  position:absolute;inset:0;display:none;
+  overflow:hidden;padding:18px 15px 24px;
+}
+.page.active{display:block;animation:pageIn .75s ease both}
+@keyframes pageIn{from{opacity:0;transform:translateX(40px) rotateY(-5deg)}to{opacity:1;transform:none}}
+
+.pageBg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(rgba(20,0,9,.25),rgba(20,0,9,.5)),
+    radial-gradient(circle at 50% 20%,rgba(255,60,110,.2),transparent 35%);
+  z-index:-3;
+}
+.land{
+  position:absolute;left:-10%;right:-10%;bottom:-6%;height:30%;
+  background:linear-gradient(170deg,#26030f,#090006);
+  clip-path:polygon(0 45%,15% 30%,28% 42%,42% 20%,57% 39%,73% 17%,87% 38%,100% 22%,100% 100%,0 100%);
+  z-index:-2;opacity:.95;
+}
+.road{
+  position:absolute;left:42%;bottom:-5%;width:20%;height:38%;
+  background:linear-gradient(90deg,transparent,#32101d,transparent);
+  transform:perspective(500px) rotateX(35deg);
+  filter:blur(2px);opacity:.8;z-index:-1;
+}
+.header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:3px 4px 10px;
+}
+.counter{font-size:14px;letter-spacing:2px;opacity:.8}
+.heartLine{color:#ff6e9b;letter-spacing:7px}
+
+.card{
+  position:relative;z-index:5;
+  max-height:43vh;overflow:auto;
+  padding:18px 18px 20px;margin-top:2px;
+  border:1px solid rgba(255,176,201,.35);
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(70,4,25,.74),rgba(20,0,10,.75));
+  backdrop-filter:blur(9px);
+  box-shadow:0 20px 55px rgba(0,0,0,.35),inset 0 0 35px rgba(255,50,100,.05);
+}
+.card::-webkit-scrollbar{width:0}
+.title{
+  font-family:'Great Vibes',cursive;font-size:44px;color:#ff9ebd;
+  line-height:1.05;text-align:center;margin:0 0 10px;
+  text-shadow:0 0 15px rgba(255,65,120,.35);
+}
+.card p{font-size:17px;line-height:1.28;margin:10px 0;color:#fff0f4}
+.signature{font-family:'Great Vibes',cursive;font-size:29px;color:#ff9ebd;text-align:right;margin-top:12px}
+
+.photos{
+  position:absolute;left:15px;right:15px;bottom:112px;
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  z-index:6;
+}
+.photo{
+  height:155px;border-radius:18px;overflow:hidden;
+  border:2px solid rgba(255,175,198,.45);
+  background:#18000b;box-shadow:0 12px 35px rgba(0,0,0,.4);
+  transform-style:preserve-3d;
+}
+.photo:nth-child(1){transform:rotate(-2deg) translateZ(10px)}
+.photo:nth-child(2){transform:rotate(2deg) translateZ(4px)}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+
+.nav{
+  position:absolute;left:18px;right:18px;bottom:16px;z-index:15;
+  display:flex;justify-content:center;gap:10px;
+}
+.btn{
+  border:1px solid rgba(255,180,205,.65);border-radius:999px;
+  background:linear-gradient(135deg,#ff3e79,#9c003b);
+  color:#fff;padding:12px 24px;font:600 17px 'Cormorant Garamond',serif;
+  box-shadow:0 10px 25px rgba(255,0,90,.22);
+}
+.btn:active{transform:scale(.96)}
+#musicBtn{position:absolute;right:15px;top:13px;z-index:30;width:42px;height:42px;border-radius:50%;border:1px solid #ff7da5;background:rgba(50,0,20,.7);color:white;font-size:18px}
+
+/* ---------- CORAZONES / PÉTALOS ---------- */
+#particles{position:absolute;inset:0;z-index:4;pointer-events:none}
+.particle{position:absolute;will-change:transform;user-select:none}
+.rose{
+  position:absolute;z-index:2;font-size:clamp(25px,8vw,42px);
+  filter:drop-shadow(0 5px 7px rgba(0,0,0,.45));
+  animation:sway 4s ease-in-out infinite alternate;
+}
+.r1{left:2%;bottom:18%}.r2{right:3%;bottom:19%;animation-delay:1s}.r3{left:8%;top:25%;font-size:28px}.r4{right:7%;top:27%;font-size:31px}
+@keyframes sway{to{transform:translateY(-8px) rotate(8deg)}}
+
+.final{
+  display:flex!important;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:30px;
+  background:radial-gradient(circle at 50% 42%,rgba(255,25,90,.24),transparent 34%);
+}
+.finalHeart{
+  width:170px;height:150px;position:relative;margin:0 auto 24px;
+  animation:heartBeat 1.8s ease-in-out infinite;
+}
+.finalHeart:before,.finalHeart:after{
+  content:"";position:absolute;top:20px;width:100px;height:150px;border-radius:100px 100px 0 0;
+  background:linear-gradient(145deg,#ff4d86,#8c0037);
+  box-shadow:0 0 35px rgba(255,30,100,.35);
+}
+.finalHeart:before{left:82px;transform:rotate(-45deg);transform-origin:0 100%}
+.finalHeart:after{left:0;transform:rotate(45deg);transform-origin:100% 100%}
+@keyframes heartBeat{50%{transform:scale(1.07)}}
+.final h2{font-family:'Great Vibes',cursive;font-size:56px;color:#ffabc5;margin:0}
+.final p{font-size:20px;line-height:1.4;max-width:340px}
+
+@media(max-height:650px){
+ .lockWrap{margin:20px 0 10px;transform:scale(.8)}
+ .card{max-height:39vh}.photo{height:110px}.photos{bottom:100px}
+ .card p{font-size:16px}.title{font-size:38px}
+}
+</style>
+</head>
+
+<body>
+<div id="app">
+  <div id="scene">
+    <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+    <div id="wind"></div>
+    <div id="particles"></div>
+
+    <!-- PORTADA -->
+    <section id="lockScreen">
+      <div class="brand">Nuestra historia ❤️</div>
+      <div class="subtitle">un pequeño regalo para vos</div>
+
+      <div class="lockWrap">
+        <div class="lock"><div class="keyhole"></div></div>
+      </div>
+
+      <div class="hint">🔑 Arrastrá la llave hasta el candado<br>y después abrilo</div>
+
+      <div class="key" id="key" aria-label="Llave arrastrable">
+        <div class="ring"></div><div class="shaft"></div>
+        <div class="tooth1"></div><div class="tooth2"></div>
+      </div>
+
+      <button id="openBtn">🔓 Abrir candado</button>
+    </section>
+
+    <!-- LIBRO -->
+    <main id="book">
+      <button id="musicBtn">♫</button>
+
+      <!-- PÁGINA 1 -->
+      <section class="page active" data-page="1">
+        <div class="pageBg"></div><div class="land"></div><div class="road"></div>
+        <div class="rose r1">🌹</div><div class="rose r2">🌹</div>
+        <div class="rose r3">🌹</div><div class="rose r4">🌹</div>
+
+        <header class="header">
+          <span class="counter">01 / 02</span><span class="heartLine">♥ ♥ ♥</span>
+        </header>
+
+        <article class="card">
+          <h1 class="title">Feliz un mes, mi amor ❤️</h1>
+          <p>
+            Sé que estamos lejos, pero eso no cambia lo que siento por vos.
+            Hoy cumplimos nuestro primer mes y quería hacerte algo especial,
+            algo que puedas guardar como un pequeño recuerdo de nosotros.
+          </p>
+          <p>
+            Sé que a veces no soy el mejor novio. A veces te hago enojar,
+            digo cosas que no debería o termino malográndote el día con mis
+            estupideces. Y aunque muchas veces no sea mi intención, sé que
+            puede pasar. Lo que sí quiero que nunca dudes es que te amo y
+            que mi intención siempre es hacerte feliz.
+          </p>
+          <p>
+            Gracias por quedarte, por aguantarme, por compartir conmigo,
+            por hacerme sentir especial y por formar parte de mi vida.
+            No todo es perfecto, pero cada momento lindo que tenemos
+            significa muchísimo para mí.
+          </p>
+          <p>
+            Ojalá pudiera estar ahí ahora mismo para abrazarte y decirte
+            todo esto mirándote a los ojos. ❤️
+          </p>
+          <div class="signature">Con mucho amor, para vos 💕</div>
+        </article>
+
+        <div class="photos">
+          <div class="photo"><img src="imagen1.png" alt="Nuestro recuerdo 1"></div>
+          <div class="photo"><img src="imagen2.png" alt="Nuestro recuerdo 2"></div>
+        </div>
+
+        <div class="nav">
+          <button class="btn" onclick="goPage(2)">Siguiente →</button>
+        </div>
+      </section>
+
+      <!-- PÁGINA 2 -->
+      <section class="page" data-page="2">
+        <div class="pageBg"></div><div class="land"></div><div class="road"></div>
+        <div class="rose r1">🌹</div><div class="rose r2">🌹</div>
+        <div class="rose r3">🌹</div><div class="rose r4">🌹</div>
+
+        <header class="header">
+          <span class="counter">02 / 02</span><span class="heartLine">♥ ♥ ♥</span>
+        </header>
+
+        <article class="card">
+          <h1 class="title">A pesar de todo ❤️</h1>
+          <p>
+            Sé que entre nosotros también hubo peleas, discusiones y malos
+            entendidos. Muchas veces una cosa termina llevando a otra y
+            terminamos discutiendo por algo que quizás empezó siendo pequeño.
+          </p>
+          <p>
+            Pero también me gusta saber que, después de todo, siempre
+            encontramos la manera de ponernos bien. Eso para mí también
+            demuestra que lo nuestro importa y que no queremos quedarnos
+            solamente con los momentos malos.
+          </p>
+          <p>
+            No puedo estar con vos ahora, pero algún día vamos a poder estar
+            juntos: besándonos, durmiendo juntos, despertándonos juntos,
+            comiendo juntos y compartiendo todas esas cosas simples que
+            hoy solamente podemos imaginar.
+          </p>
+          <p>
+            Y también quiero conocer a tu hijo. Sé que todavía hay muchas
+            cosas por organizar y que no todo es fácil, pero voy a seguir
+            trabajando para conseguirlo, juntar mi plata y, por lo menos,
+            poder ir a verte una semana. Todavía no sé cuándo ni cómo,
+            porque tampoco quiero estorbar ni complicarte las cosas.
+          </p>
+          <p>
+            Pero sí sé algo: te amo muchísimo. Feliz primer mes de novios,
+            mi amor. 🥺❤️ Y ojalá este sea solamente el primero de muchos
+            meses, recuerdos, risas y momentos que todavía nos quedan por vivir.
+          </p>
+          <div class="signature">Vamos por muchos más. ❤️</div>
+        </article>
+
+        <div class="photos">
+          <div class="photo"><img src="imagen3.png" alt="Nuestro recuerdo 3"></div>
+          <div class="photo"><img src="imagen4.png" alt="Nuestro recuerdo 4"></div>
+        </div>
+
+        <div class="nav">
+          <button class="btn" onclick="goPage(1)">← Volver</button>
+          <button class="btn" onclick="goPage(3)">Final ❤️</button>
+        </div>
+      </section>
+
+      <!-- FINAL -->
+      <section class="page final" data-page="3">
+        <div class="finalHeart"></div>
+        <h2>Te amo, mi amor ❤️</h2>
+        <p>
+          Un mes de nosotros, a pesar de la distancia,
+          las peleas y los malos entendidos.
+          Gracias por estar. 🥺
+        </p>
+        <p><b>Y vamos por muchos momentos más juntos. 🌹</b></p>
+        <button class="btn" onclick="goPage(1)">↺ Volver a empezar</button>
+      </section>
+    </main>
+  </div>
+
+  <!-- Cambiá solamente este archivo si tu música tiene otro nombre -->
+  <audio id="music" src="musiica.mp3" loop preload="auto"></audio>
+</div>
+
+<script>
+/* =========================================================
+   ANIMACIONES 3D + FÍSICA LIGERA PARA CELULAR
+   ========================================================= */
+
+const lockScreen = document.getElementById('lockScreen');
+const book = document.getElementById('book');
+const key = document.getElementById('key');
+const openBtn = document.getElementById('openBtn');
+const music = document.getElementById('music');
+const musicBtn = document.getElementById('musicBtn');
+const particles = document.getElementById('particles');
+
+let unlocked = false;
+let dragging = false;
+let keyX = 0, keyY = 0, startX = 0, startY = 0;
+let keyHomeX = 0, keyHomeY = 0;
+
+/* ----- llave táctil / mouse ----- */
+function pointerPos(e){
+  if(e.touches && e.touches[0]) return {x:e.touches[0].clientX,y:e.touches[0].clientY};
+  return {x:e.clientX,y:e.clientY};
+}
+function startDrag(e){
+  if(unlocked)return;
+  e.preventDefault();
+  const p=pointerPos(e);
+  const r=key.getBoundingClientRect();
+  startX=p.x; startY=p.y;
+  keyHomeX=r.left + r.width/2;
+  keyHomeY=r.top + r.height/2;
+  dragging=true;
+  key.style.transition='none';
+}
+function moveDrag(e){
+  if(!dragging || unlocked)return;
+  e.preventDefault();
+  const p=pointerPos(e);
+  keyX=p.x-keyHomeX;
+  keyY=p.y-keyHomeY;
+  key.style.transform=`translate(calc(-50% + ${keyX}px),${keyY}px) rotate(${keyX*.04}deg)`;
+  const lock=document.querySelector('.lock').getBoundingClientRect();
+  const kr=key.getBoundingClientRect();
+  const cx=kr.left+kr.width/2, cy=kr.top+kr.height/2;
+  const lx=lock.left+lock.width/2, ly=lock.top+lock.height/2;
+  const d=Math.hypot(cx-lx,cy-ly);
+  if(d<75){
+    key.style.filter='drop-shadow(0 0 18px #ff9dbc)';
+  }else key.style.filter='drop-shadow(0 12px 12px rgba(0,0,0,.5))';
+}
+function endDrag(){
+  if(!dragging)return;
+  dragging=false;
+  const lock=document.querySelector('.lock').getBoundingClientRect();
+  const kr=key.getBoundingClientRect();
+  const cx=kr.left+kr.width/2, cy=kr.top+kr.height/2;
+  const lx=lock.left+lock.width/2, ly=lock.top+lock.height/2;
+  const d=Math.hypot(cx-lx,cy-ly);
+
+  if(d<85){
+    key.style.transition='transform .5s ease,opacity .5s ease';
+    key.style.transform='translate(-50%, -20px) rotate(90deg) scale(.7)';
+    key.style.opacity='.15';
+    unlocked=true;
+    openBtn.classList.add('ready');
+  }else{
+    key.style.transition='transform .45s cubic-bezier(.2,.8,.2,1)';
+    key.style.transform='translateX(-50%)';
+  }
+}
+key.addEventListener('mousedown',startDrag);
+window.addEventListener('mousemove',moveDrag);
+window.addEventListener('mouseup',endDrag);
+key.addEventListener('touchstart',startDrag,{passive:false});
+window.addEventListener('touchmove',moveDrag,{passive:false});
+window.addEventListener('touchend',endDrag);
+
+/* ----- abrir ----- */
+openBtn.addEventListener('click',()=>{
+  if(!unlocked)return;
+  lockScreen.classList.add('hide');
+  book.classList.add('show');
+  music.play().then(()=>musicBtn.textContent='🔊').catch(()=>musicBtn.textContent='♫');
+  burstHearts();
+});
+
+/* ----- música ----- */
+musicBtn.addEventListener('click',()=>{
+  if(music.paused){
+    music.play().then(()=>musicBtn.textContent='🔊');
+  }else{
+    music.pause(); musicBtn.textContent='♫';
+  }
+});
+
+/* ----- páginas ----- */
+let currentPage=1;
+function goPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target=document.querySelector(`.page[data-page="${n}"]`);
+  if(target) target.classList.add('active');
+  currentPage=n;
+  burstHearts();
+}
+
+/* ----- swipe ----- */
+let touchStartX=0;
+document.addEventListener('touchstart',e=>{
+  touchStartX=e.touches[0].clientX;
+},{passive:true});
+document.addEventListener('touchend',e=>{
+  if(!book.classList.contains('show'))return;
+  const dx=e.changedTouches[0].clientX-touchStartX;
+  if(Math.abs(dx)<70)return;
+  if(dx<0 && currentPage<3)goPage(currentPage+1);
+  if(dx>0 && currentPage>1)goPage(currentPage-1);
+},{passive:true});
+
+/* =========================================================
+   PARTÍCULAS: corazones + pétalos + globos
+   ========================================================= */
+const items=['❤','♥','🌹','🌸','💗','✦','•'];
+const live=[];
+function makeParticle(){
+  const el=document.createElement('div');
+  el.className='particle';
+  el.textContent=items[Math.floor(Math.random()*items.length)];
+  const size=10+Math.random()*22;
